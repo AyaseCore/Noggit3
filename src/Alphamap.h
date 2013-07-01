@@ -1,0 +1,51 @@
+#ifndef ALPHAMAP_H
+#define ALPHAMAP_H
+
+#include <GL/glew.h>
+
+#include "MPQ.h"
+#include "Log.h"
+
+class Alphamap
+{
+public:
+  Alphamap();
+  Alphamap(MPQFile* f, unsigned int & flags, bool mBigAlpha);
+  ~Alphamap();
+
+  void loadTexture();
+
+  inline void bind()
+  {
+    glBindTexture(GL_TEXTURE_2D, map);
+  }
+
+  inline bool isValid()
+  {
+    return (map > 0);
+  }
+
+  inline void setAlpha(size_t offset, unsigned char value)
+  {
+    amap[offset] = value;
+  }
+
+  inline const unsigned char getAlpha(size_t offset)
+  {
+    return amap[offset];
+  }
+
+private:
+  void readCompressed(MPQFile *f);
+  void readBigAlpha(MPQFile *f);
+  void readNotCompressed(MPQFile *f);
+
+  void createNew();
+
+  void genTexture();
+
+  unsigned char amap[64*64];
+  GLuint map;
+};
+
+#endif //ALPHAMAP_H
