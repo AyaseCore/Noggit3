@@ -1,0 +1,13 @@
+// This file is part of Noggit3, licensed under GNU General Public License (version 3).
+
+#pragma once
+
+namespace helper
+{
+  namespace repository
+  {
+    inline int revision() { return @hg_rev_id@; }
+    inline QString revision_string() { return "@hg_rev_id_str@"; }
+    inline QString hash() { return "@hg_rev_hash_str@"; }
+  }
+}
