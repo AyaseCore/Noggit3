@@ -1,0 +1,4 @@
+"libs\test\src\framework.cpp" -Fo"bin.v2\libs\test\build\msvc-12.0\rls\async-excpt-on\lnk-sttc\rntm-lnk-sttc\framework.obj"    -TP /O2 /Ob2 /W4 /GR /Zc:forScope /Zc:wchar_t /MT /wd4675 /EHa -wd4671 -wd4673 -c 
+-DBOOST_ALL_NO_LIB=1 
+-DNDEBUG 
+"-I."

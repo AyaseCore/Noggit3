@@ -1,0 +1,9 @@
+
+"bin.v2\libs\filesystem\build\msvc-14.0\release\link-static\runtime-link-static\codecvt_error_category.obj" 
+"bin.v2\libs\filesystem\build\msvc-14.0\release\link-static\runtime-link-static\operations.obj" 
+"bin.v2\libs\filesystem\build\msvc-14.0\release\link-static\runtime-link-static\path.obj" 
+"bin.v2\libs\filesystem\build\msvc-14.0\release\link-static\runtime-link-static\path_traits.obj" 
+"bin.v2\libs\filesystem\build\msvc-14.0\release\link-static\runtime-link-static\portability.obj" 
+"bin.v2\libs\filesystem\build\msvc-14.0\release\link-static\runtime-link-static\unique_path.obj" 
+"bin.v2\libs\filesystem\build\msvc-14.0\release\link-static\runtime-link-static\utf8_codecvt_facet.obj" 
+"bin.v2\libs\filesystem\build\msvc-14.0\release\link-static\runtime-link-static\windows_file_codecvt.obj"   

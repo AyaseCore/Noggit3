@@ -1,0 +1,9 @@
+"libs\context\src\execution_context.cpp" -Fo"bin.v2\libs\context\build\msvc-12.0\dbg\lnk-sttc\rntm-lnk-sttc\thrd-mlt\execution_context.obj"    -TP /Z7 /Od /Ob0 /W3 /GR /MTd /Zc:forScope /Zc:wchar_t /wd4675 /EHs -c 
+-DBOOST_ALL_NO_LIB=1 
+-DBOOST_CHRONO_STATIC_LINK=1 
+-DBOOST_CONTEXT_SOURCE 
+-DBOOST_SYSTEM_NO_DEPRECATED 
+-DBOOST_SYSTEM_STATIC_LINK=1 
+-DBOOST_THREAD_BUILD_LIB=1 
+-DBOOST_THREAD_USE_LIB=1 
+"-I."

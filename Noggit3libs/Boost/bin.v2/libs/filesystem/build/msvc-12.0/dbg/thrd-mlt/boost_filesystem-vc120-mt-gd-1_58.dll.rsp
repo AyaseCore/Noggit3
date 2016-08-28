@@ -1,0 +1,10 @@
+
+"bin.v2\libs\filesystem\build\msvc-12.0\dbg\thrd-mlt\codecvt_error_category.obj" 
+"bin.v2\libs\filesystem\build\msvc-12.0\dbg\thrd-mlt\operations.obj" 
+"bin.v2\libs\filesystem\build\msvc-12.0\dbg\thrd-mlt\path.obj" 
+"bin.v2\libs\filesystem\build\msvc-12.0\dbg\thrd-mlt\path_traits.obj" 
+"bin.v2\libs\filesystem\build\msvc-12.0\dbg\thrd-mlt\portability.obj" 
+"bin.v2\libs\filesystem\build\msvc-12.0\dbg\thrd-mlt\unique_path.obj" 
+"bin.v2\libs\filesystem\build\msvc-12.0\dbg\thrd-mlt\utf8_codecvt_facet.obj" 
+"bin.v2\libs\filesystem\build\msvc-12.0\dbg\thrd-mlt\windows_file_codecvt.obj" 
+"bin.v2\libs\system\build\msvc-12.0\dbg\thrd-mlt\boost_system-vc120-mt-gd-1_58.lib"    

@@ -1,0 +1,10 @@
+
+"bin.v2\libs\log\build\msvc-12.0\rls\lnk-sttc\log-api-wnt\rntm-lnk-sttc\parser_utils.obj" 
+"bin.v2\libs\log\build\msvc-12.0\rls\lnk-sttc\log-api-wnt\rntm-lnk-sttc\init_from_stream.obj" 
+"bin.v2\libs\log\build\msvc-12.0\rls\lnk-sttc\log-api-wnt\rntm-lnk-sttc\init_from_settings.obj" 
+"bin.v2\libs\log\build\msvc-12.0\rls\lnk-sttc\log-api-wnt\rntm-lnk-sttc\settings_parser.obj" 
+"bin.v2\libs\log\build\msvc-12.0\rls\lnk-sttc\log-api-wnt\rntm-lnk-sttc\filter_parser.obj" 
+"bin.v2\libs\log\build\msvc-12.0\rls\lnk-sttc\log-api-wnt\rntm-lnk-sttc\formatter_parser.obj" 
+"bin.v2\libs\log\build\msvc-12.0\rls\lnk-sttc\log-api-wnt\rntm-lnk-sttc\default_filter_factory.obj" 
+"bin.v2\libs\log\build\msvc-12.0\rls\lnk-sttc\log-api-wnt\rntm-lnk-sttc\matches_relation_factory.obj" 
+"bin.v2\libs\log\build\msvc-12.0\rls\lnk-sttc\log-api-wnt\rntm-lnk-sttc\default_formatter_factory.obj"   

@@ -1,0 +1,6 @@
+"libs\chrono\src\process_cpu_clocks.cpp" -Fo"bin.v2\libs\chrono\build\msvc-12.0\dbg\thrd-mlt\process_cpu_clocks.obj"    -TP /Z7 /Od /Ob0 /W4 /GR /MDd /Zc:forScope /Zc:wchar_t /wd4675 /EHs /wd4512 -c 
+-DBOOST_ALL_DYN_LINK=1 
+-DBOOST_ALL_NO_LIB=1 
+-DBOOST_SYSTEM_DYN_LINK=1 
+-DBOOST_SYSTEM_NO_DEPRECATED 
+"-I."

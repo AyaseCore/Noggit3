@@ -1,0 +1,4 @@
+"libs\serialization\src\basic_text_oprimitive.cpp" -Fo"bin.v2\libs\serialization\build\msvc-12.0\rls\lnk-sttc\rntm-lnk-sttc\basic_text_oprimitive.obj"    -TP /O2 /Ob2 /W3 /GR /Zc:forScope /Zc:wchar_t /MT /wd4675 /EHs /Gy -c 
+-DBOOST_ALL_NO_LIB=1 
+-DNDEBUG 
+"-I."

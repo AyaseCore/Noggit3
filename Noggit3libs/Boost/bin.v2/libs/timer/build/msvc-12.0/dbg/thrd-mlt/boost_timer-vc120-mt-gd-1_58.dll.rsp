@@ -1,0 +1,5 @@
+
+"bin.v2\libs\timer\build\msvc-12.0\dbg\thrd-mlt\auto_timers_construction.obj" 
+"bin.v2\libs\timer\build\msvc-12.0\dbg\thrd-mlt\cpu_timer.obj" 
+"bin.v2\libs\chrono\build\msvc-12.0\dbg\thrd-mlt\boost_chrono-vc120-mt-gd-1_58.lib" 
+"bin.v2\libs\system\build\msvc-12.0\dbg\thrd-mlt\boost_system-vc120-mt-gd-1_58.lib"    
