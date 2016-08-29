@@ -3,7 +3,7 @@ dist: trusty
 
 language: cpp
 compiler:
-  - clang
+  - gcc
 
 git:
   depth: 1
@@ -11,7 +11,8 @@ git:
 before_install:
   - sudo apt-get -qq install build-essential libtool make cmake cmake-data openssl
   - sudo apt-get -qq install libssl-dev libreadline6-dev zlib1g-dev libbz2-dev
-  - sudo apt-get -qq install libboost-thread-dev libboost-filesystem-dev libboost-system-dev libbz2-dev libsdl1.2-dev libfreetype6-dev libglew-dev libglewmx-dev
+  - sudo apt-get -qq install libboost-thread-dev libboost-filesystem-dev libboost-system-dev 
+  - sudo apt-get -qq install libbz2-dev libsdl1.2-dev libfreetype6-dev libglew-dev libglewmx-dev
   - git config user.email "travis@build.bot" && git config user.name "Travis CI"
   - git tag -a -m "Travis build" init
 
