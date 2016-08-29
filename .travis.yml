@@ -15,5 +15,5 @@ before_install:
   - git tag -a -m "Travis build" init
 
 install:
-  - cmake ../
+  - cmake
   - make -j 8 -k && make install
