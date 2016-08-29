@@ -17,4 +17,4 @@ before_install:
   - git tag -a -m "Travis build" init
 
 install:
-  - configure && make && make test
+  - make -j 8 -k && make install
