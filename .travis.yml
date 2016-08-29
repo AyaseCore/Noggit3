@@ -3,7 +3,7 @@ dist: trusty
 
 language: cpp
 compiler:
-  - gcc
+  - clang
 
 git:
   depth: 1
