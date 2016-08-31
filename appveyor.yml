@@ -1,4 +1,6 @@
 version: 1.0.{build}
+configuration:
+  - Release
 init:
   - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
 before_build:
@@ -11,5 +13,13 @@ before_build:
 build:
   project: Noggit.sln
   verbosity: normal
+after_build:
+  - 7z a Noggit3.zip %APPVEYOR_BUILD_FOLDER%\Noggit3libs\SDL\lib\x86\SDL.dll
+  - 7z a Noggit3.zip %APPVEYOR_BUILD_FOLDER%\Noggit3libs\freetype2\bin\freetype6.dll
+  - 7z a Noggit3.zip %APPVEYOR_BUILD_FOLDER%\Noggit3libs\Glew\bin\Release\Win32\glew32.dll
+  - 7z a Noggit3.zip %APPVEYOR_BUILD_FOLDER%\Noggit3libs\StormLib\Release\StormLib.dll
+artifacts:
+  - path: Noggit3.zip
+    name: Noggit3
 on_finish:
   - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
