@@ -9,7 +9,7 @@ ChunkWater::ChunkWater(float pX, float pY)
 	: x(pX)
 	, y(pY)
 {
-  for (int i = 0; i < 5; i++)
+  for (int i = 0; i < 5; ++i)
     Liquids[i] = nullptr;
 }
 
