@@ -1,0 +1,7 @@
+version: 1.0.{build}
+before_build:
+    - ps: SET PATH=%APPVEYOR_BUILD_FOLDER%\Noggit3libs;%PATH%
+    - ps: cmake -G "Visual Studio 14"
+build:
+  project: Noggit.sln
+  verbosity: normal
