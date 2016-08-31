@@ -1,7 +1,7 @@
 //\! pls update and/or find other solution...
 Noggit SDL 1.4 changelog
 
-Done:
+Done: 
 
 - Add app Icon
 - You can now load BGs
