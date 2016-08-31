@@ -9,7 +9,8 @@ ChunkWater::ChunkWater(float pX, float pY)
 	: x(pX)
 	, y(pY)
 {
-	Liquids[0] = NULL;
+  for (int i = 0; i < 5; i++)
+    Liquids[i] = nullptr;
 }
 
 ChunkWater::~ChunkWater()
@@ -18,26 +19,39 @@ ChunkWater::~ChunkWater()
 void ChunkWater::reloadRendering()
 {
 	if (!Header.nLayers) return;
-	if (!Liquids[0]) Liquids[0] = new Liquid(Info[0].width, Info[0].height, Vec3D(x, Info[0].minHeight, y));
 
-	MH2O_Tile lTile;
-	lTile.mLiquidType = Info[0].LiquidType;
-	lTile.mMaximum = Info[0].maxHeight;
-	lTile.mMinimum = Info[0].minHeight;
-	lTile.mFlags = Info[0].Flags;
+  for (size_t k = 0; k < Header.nLayers; ++k)
+  {
+    if (!Liquids[k])
+    {
+      Liquids[k] = new Liquid(Info[k].width, Info[k].height, Vec3D(x, Info[k].minHeight, y));
+    }      
 
-	for (int x = 0; x < 9; ++x)
-	{
-		for (int y = 0; y < 9; ++y)
-		{
-			lTile.mHeightmap[x][y] = HeightData[0].mHeightValues[x][y];
-			lTile.mDepth[x][y] = (HeightData[0].mTransparency[x][y] / 255.0f);
-		}
-	}
+    MH2O_Tile lTile;
+    lTile.mLiquidType = Info[k].LiquidType;
+    lTile.mMaximum = Info[k].maxHeight;
+    lTile.mMinimum = Info[k].minHeight;
+    lTile.mFlags = Info[k].Flags;
 
-	memcpy(lTile.mRender, existsTable, 8 * 8);
+    for (int x = 0; x < 9; ++x)
+    {
+      for (int y = 0; y < 9; ++y)
+      {
+        lTile.mHeightmap[x][y] = HeightData[k].mHeightValues[x][y];
+        lTile.mDepth[x][y] = (HeightData[k].mTransparency[x][y] / 255.0f);
+      }
+    }
 
-	Liquids[0]->initFromMH2O(lTile);
+    for (size_t i = 0; i < 8; ++i)
+    {
+      for (size_t j = 0; j < 8; ++j)
+      {
+        lTile.mRender[i][j] |= existsTable[k][i][j];
+      }
+    }
+
+    Liquids[k]->initFromMH2O(lTile);
+  }
 }
 
 void ChunkWater::fromFile(MPQFile &f, size_t basePos)
@@ -45,21 +59,21 @@ void ChunkWater::fromFile(MPQFile &f, size_t basePos)
 	f.read(&Header, sizeof(MH2O_Header));
 	if (!Header.nLayers) return;
 
+  size_t infoMaskPos, heightDataPos;
+
 	for (int k = 0; k < (int)Header.nLayers; ++k)
 	{
-		if (k > 0) break; //Temporary only for 1 layer
-
 		memset(existsTable[k], 0, 8 * 8);
 		memset(InfoMask, 0, 8);
 
 		//info
-		f.seek(basePos + Header.ofsInformation);
+		f.seek(basePos + Header.ofsInformation + sizeof(MH2O_Information)* k);
 		f.read(&Info[k], sizeof(MH2O_Information));
 
 		//render
 		if (Header.ofsRenderMask)
 		{
-			f.seek(basePos + Header.ofsRenderMask);
+			f.seek(basePos + Header.ofsRenderMask + sizeof(MH2O_Render)* k);
 			f.read(&Render[k], sizeof(MH2O_Render));
 		}
 		else
@@ -93,8 +107,6 @@ void ChunkWater::fromFile(MPQFile &f, size_t basePos)
 			}
 		}
 
-
-
 		for (int h = 0; h < 9; ++h)
 		{
 			for (int w = 0; w < 9; ++w)
@@ -104,11 +116,12 @@ void ChunkWater::fromFile(MPQFile &f, size_t basePos)
 			}
 		}
 
+    if (!Info[k].ofsHeightMap)
+    {
+      continue;
+    }			
 
-		if (!Info[k].ofsHeightMap)
-			return;
-
-		f.seek(basePos + Info[k].ofsHeightMap);
+    f.seek(basePos + Info[k].ofsHeightMap);
 
 		if (Info[k].Flags != 2)
 		{
@@ -141,92 +154,107 @@ void ChunkWater::writeInfo(sExtendableArray &lADTFile, size_t basePos, int &lCur
 {
 	if (!hasData()) return;
 
-	lADTFile.Insert(lCurrentPosition, sizeof(MH2O_Information), reinterpret_cast<char*>(&Info[0])); //insert MH2O_Information
-	Header.ofsInformation = lCurrentPosition - basePos; //setting offset to this info at the header
-	Header.nLayers = 1;
-	lCurrentPosition += sizeof(MH2O_Information);
+  Header.ofsInformation = lCurrentPosition - basePos; //setting offset to this info at the header
+
+  for (size_t i = 0; i < Header.nLayers; ++i)
+  {
+    lADTFile.Insert(lCurrentPosition, sizeof(MH2O_Information), reinterpret_cast<char*>(&Info[i])); //insert MH2O_Information
+    lCurrentPosition += sizeof(MH2O_Information);
+  }	
 }
 
 void ChunkWater::writeData(size_t offHeader, sExtendableArray &lADTFile, size_t basePos, int &lCurrentPosition)
 {
 	if (!hasData()) return;
 
-	Info[0].yOffset = 8;
-	Info[0].xOffset = 8;
-	Info[0].height = 0;
-	Info[0].width = 0;
-	Info[0].minHeight = HeightData[0].mHeightValues[0][0];
-	Info[0].maxHeight = HeightData[0].mHeightValues[0][0];
-	Info[0].ofsHeightMap = 0;
+  Header.ofsRenderMask = lCurrentPosition - basePos;
 
-	//render
-	Header.ofsRenderMask = lCurrentPosition - basePos;
-	lADTFile.Insert(lCurrentPosition, sizeof(MH2O_Render), reinterpret_cast<char*>(&Render[0]));
-	lCurrentPosition += sizeof(MH2O_Render);
+  for (size_t i = 0; i < Header.nLayers; ++i)
+  {
+    Info[i].yOffset = 8;
+    Info[i].xOffset = 8;
+    Info[i].height = 0;
+    Info[i].width = 0;
+    Info[i].minHeight = HeightData[i].mHeightValues[0][0];
+    Info[i].maxHeight = HeightData[i].mHeightValues[0][0];
+    Info[i].ofsHeightMap = 0;
 
-	for (int h = 0; h < 8; ++h)
-	{
-		for (int w = 0; w < 8; ++w)
-		{
-			if (!existsTable[0][h][w]) continue;
+    //render
 
-			if (w < Info[0].xOffset) Info[0].xOffset = w;
-			if (h < Info[0].yOffset) Info[0].yOffset = h;
+    lADTFile.Insert(lCurrentPosition, sizeof(MH2O_Render), reinterpret_cast<char*>(&Render[i]));
+    lCurrentPosition += sizeof(MH2O_Render);
 
-			if (w > Info[0].width) Info[0].width = w;
-			if (h > Info[0].height) Info[0].height = h;
-		}
-	}
+    for (int h = 0; h < 8; ++h)
+    {
+      for (int w = 0; w < 8; ++w)
+      {
+        if (!existsTable[i][h][w]) continue;
 
-	Info[0].height -= Info[0].yOffset - 1;
-	Info[0].width -= Info[0].xOffset - 1;
+        if (w < Info[i].xOffset) Info[i].xOffset = w;
+        if (h < Info[i].yOffset) Info[i].yOffset = h;
 
-	uint8_t infoMask[8];
-	int bitOffset = 0;
+        if (w > Info[i].width) Info[i].width = w;
+        if (h > Info[i].height) Info[i].height = h;
+      }
+    }
 
-	memset(infoMask, 0, 8);
+    Info[i].height -= Info[i].yOffset - 1;
+    Info[i].width -= Info[i].xOffset - 1;
+  }
 
-	for (int h = 0; h < Info[0].height; ++h)
-	{
-		for (int w = 0; w < Info[0].width; ++w)
-		{
-			infoMask[bitOffset / 8] |= (1 << (bitOffset % 8));
-			bitOffset++;
-		}
-	}
+  for (size_t i = 0; i < Header.nLayers; ++i)
+  {
+    uint8_t infoMask[8];
+    int bitOffset = 0;
 
-	//mask
-	lADTFile.Insert(lCurrentPosition, (int)std::ceil(bitOffset / 8.0f), reinterpret_cast<char*>(infoMask));
-	Info[0].ofsInfoMask = lCurrentPosition - basePos;
-	lCurrentPosition += (int)std::ceil(bitOffset / 8.0f);
+    memset(infoMask, 0, 8);
 
-	//HeighData & TransparencyData
-	Info[0].ofsHeightMap = lCurrentPosition - basePos;
+    for (int h = 0; h < Info[i].height; ++h)
+    {
+      for (int w = 0; w < Info[i].width; ++w)
+      {
+        infoMask[bitOffset / 8] |= (1 << (bitOffset % 8));
+        bitOffset++;
+      }
+    }
 
-	for (int h = Info[0].yOffset; h < Info[0].yOffset + Info[0].height + 1; ++h)
-	{
-		for (int w = Info[0].xOffset; w < Info[0].xOffset + Info[0].width + 1; ++w)
-		{
-			if (HeightData[0].mHeightValues[h][w] < Info[0].minHeight) Info[0].minHeight = HeightData[0].mHeightValues[h][w];
-			if (HeightData[0].mHeightValues[h][w] > Info[0].maxHeight) Info[0].maxHeight = HeightData[0].mHeightValues[h][w];
+    //mask
+    lADTFile.Insert(lCurrentPosition, (int)std::ceil(bitOffset / 8.0f), reinterpret_cast<char*>(infoMask));
+    Info[i].ofsInfoMask = lCurrentPosition - basePos;
+    lCurrentPosition += (int)std::ceil(bitOffset / 8.0f);
+  }
 
+  for (size_t i = 0; i < Header.nLayers; ++i)
+  {
+    //HeighData & TransparencyData
+    Info[i].ofsHeightMap = lCurrentPosition - basePos;
 
-			lADTFile.Insert(lCurrentPosition, sizeof(float), reinterpret_cast<char*>(&HeightData[0].mHeightValues[h][w]));
-			lCurrentPosition += sizeof(float);
-		}
-	}
+    if (Info[i].Flags != 2)
+    {
+      for (int h = Info[i].yOffset; h < Info[i].yOffset + Info[i].height + 1; ++h)
+      {
+        for (int w = Info[i].xOffset; w < Info[i].xOffset + Info[i].width + 1; ++w)
+        {
+          Info[i].minHeight = std::min(HeightData[i].mHeightValues[h][w], Info[i].minHeight);
+          Info[i].maxHeight = std::max(HeightData[i].mHeightValues[h][w], Info[i].maxHeight);
 
-	for (int h = Info[0].yOffset; h < Info[0].yOffset + Info[0].height + 1; ++h)
-	{
-		for (int w = Info[0].xOffset; w < Info[0].xOffset + Info[0].width + 1; ++w)
-		{
-			lADTFile.Insert(lCurrentPosition, sizeof(unsigned char), reinterpret_cast<char*>(&HeightData[0].mTransparency[h][w]));
-			lCurrentPosition += sizeof(unsigned char);
-		}
-	}
+          lADTFile.Insert(lCurrentPosition, sizeof(float), reinterpret_cast<char*>(&HeightData[i].mHeightValues[h][w]));
+          lCurrentPosition += sizeof(float);
+        }
+      }
+    }
 
-	memcpy(lADTFile.GetPointer<char>(offHeader), &Header, sizeof(MH2O_Header));
-	memcpy(lADTFile.GetPointer<char>(basePos + Header.ofsInformation), &Info[0], sizeof(MH2O_Information));
+    for (int h = Info[i].yOffset; h < Info[i].yOffset + Info[i].height + 1; ++h)
+    {
+      for (int w = Info[i].xOffset; w < Info[i].xOffset + Info[i].width + 1; ++w)
+      {
+        lADTFile.Insert(lCurrentPosition, sizeof(unsigned char), reinterpret_cast<char*>(&HeightData[i].mTransparency[h][w]));
+        lCurrentPosition += sizeof(unsigned char);
+      }
+    }
+    memcpy(lADTFile.GetPointer<char>(basePos + Header.ofsInformation + sizeof(MH2O_Information)*i), &Info[i], sizeof(MH2O_Information));
+  }
+  memcpy(lADTFile.GetPointer<char>(offHeader), &Header, sizeof(MH2O_Header));
 }
 
 void ChunkWater::autoGen(MapChunk *chunk, int factor)
@@ -437,6 +465,13 @@ bool ChunkWater::hasData()
 
 void ChunkWater::draw()
 {
-	if (!hasData()) return;
-	Liquids[0]->draw();
+  if (!hasData())
+  {
+    return;
+  }    
+  
+  for (size_t i = 0; i < Header.nLayers; ++i)
+  {
+    Liquids[i]->draw();
+  }	
 }
