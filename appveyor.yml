@@ -3,6 +3,9 @@ init:
   - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
 before_build:
   - cmd: SET PATH=%APPVEYOR_BUILD_FOLDER%\Noggit3libs;%PATH%
+  - cmd: SET PATH=%APPVEYOR_BUILD_FOLDER%\Noggit3libs;%PATH%
+  - cmd: SET PATH=%APPVEYOR_BUILD_FOLDER%\Noggit3libs\freetype2;%PATH%
+  - cmd: SET PATH=%APPVEYOR_BUILD_FOLDER%\Noggit3libs\freetype2\lib;%PATH%
   - ps: cmake -G "Visual Studio 14"
 build:
   project: Noggit.sln
