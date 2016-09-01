@@ -1,6 +1,6 @@
 # ![logo](http://i.imgur.com/LnUGSeD.png) Noggit
 
-[![Issue Stats](http://issuestats.com/github/majorcyto/Noggit3/badge/issue?style=flat-square)](http://issuestats.com/github/majorcyto/Noggit3) [![Bountysource](https://www.bountysource.com/badge/tracker?tracker_id=44146666)](https://www.bountysource.com/trackers/44146666-majorcyto-noggit3?utm_source=4414666&utm_medium=shield&utm_campaign=TRACKER_BADGE)
+[![Latest Download](https://img.shields.io/badge/Latest-Download-blue.svg)](https://ci.appveyor.com/api/projects/majorcyto/noggit3/artifacts/Noggit3.zip) [![Issue Stats](http://issuestats.com/github/majorcyto/Noggit3/badge/issue?style=flat-square)](http://issuestats.com/github/majorcyto/Noggit3) [![Bountysource](https://www.bountysource.com/badge/tracker?tracker_id=44146666)](https://www.bountysource.com/trackers/44146666-majorcyto-noggit3?utm_source=4414666&utm_medium=shield&utm_campaign=TRACKER_BADGE)
 
 ## Build Status
 
