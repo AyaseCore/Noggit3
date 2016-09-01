@@ -6,7 +6,7 @@
 
 Build | Defects
 :------------: | :------------:
-[![Build status](https://ci.appveyor.com/api/projects/status/ycb8c1t6mv9y3i1u/branch/master?svg=true)](https://ci.appveyor.com/project/majorcyto/noggit3/branch/master) | [![Coverity Scan Build Status](https://scan.coverity.com/projects/4656/badge.svg)](https://scan.coverity.com/projects/4656)
+[![Build status](https://ci.appveyor.com/api/projects/status/ycb8c1t6mv9y3i1u/branch/master?svg=true)](https://ci.appveyor.com/project/majorcyto/noggit3/branch/master) | Coverity Badge Soon
 
 
 # LICENSE #
@@ -29,17 +29,13 @@ following libraries:
 * Boost
 * SDL 1.2
 
-For Windows there is a repo with all needed libs to compile noggit3.
-Read the description there before you start.
-
-https://bitbucket.org/modcraft/noggit3libs
+All the required Libs can now be found as part of the repository in the folder labeled "Noggit3libs"
 
 # DEVELOPMENT #
-Feel   free   to   ask   the   owner  of   the   official   repository
-(https://bitbucket.org/berndloerwald/noggit3/)  for  write  access  or
+Feel free to open an issue for collaborator access or
 fork and post a pull request.
 
-There is a bug tracker at http://modcraft.superparanoid.de/bugtracker/index.php which should be used.
+Please use the Github Issue tracker for requests and reports.
 
 # CODING GUIDELINES #
 Following is  an example for file  src/noggit/ui/foo_ban.h. .cpp files
