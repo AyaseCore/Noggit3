@@ -1,4 +1,6 @@
 version: 1.0.{build}
+configuration:
+  - Release
 init:
   - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
 before_build:
@@ -9,13 +11,15 @@ before_build:
   - cmd: SET PATH=%APPVEYOR_BUILD_FOLDER%\Noggit3libs\StormLib\ReleaseAD;%PATH%
   - cmake -G "Visual Studio 14"
 build:
+  parallel: true
   project: Noggit.sln
-  verbosity: normal
+  verbosity: minimal
 after_build:
   - 7z a Noggit3.zip %APPVEYOR_BUILD_FOLDER%\Noggit3libs\SDL\lib\x86\SDL.dll
   - 7z a Noggit3.zip %APPVEYOR_BUILD_FOLDER%\Noggit3libs\freetype2\bin\freetype6.dll
   - 7z a Noggit3.zip %APPVEYOR_BUILD_FOLDER%\Noggit3libs\Glew\bin\Release\Win32\glew32.dll
   - 7z a Noggit3.zip %APPVEYOR_BUILD_FOLDER%\Noggit3libs\StormLib\Release\StormLib.dll
+  - 7z a Noggit3.zip %APPVEYOR_BUILD_FOLDER%\bin\Release\noggit.exe
 artifacts:
   - path: Noggit3.zip
     name: Noggit3
