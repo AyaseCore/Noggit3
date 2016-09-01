@@ -1,12 +1,12 @@
-# ![logo](http://i.imgur.com/LnUGSeD.png) Noggit
+# ![logo](http://i.imgur.com/LnUGSeD.png) Noggit | [![Bountysource](https://www.bountysource.com/badge/tracker?tracker_id=44146666)](https://www.bountysource.com/trackers/44146666-wowdevtools-noggit3?utm_source=4414666&utm_medium=shield&utm_campaign=TRACKER_BADGE)
 
-[![Latest Download](https://img.shields.io/badge/Latest-Download-blue.svg)](https://ci.appveyor.com/api/projects/majorcyto/noggit3/artifacts/Noggit3.zip) [![Issue Stats](http://issuestats.com/github/majorcyto/Noggit3/badge/issue?style=flat-square)](http://issuestats.com/github/majorcyto/Noggit3) [![Bountysource](https://www.bountysource.com/badge/tracker?tracker_id=44146666)](https://www.bountysource.com/trackers/44146666-majorcyto-noggit3?utm_source=4414666&utm_medium=shield&utm_campaign=TRACKER_BADGE)
+[![Latest Download](https://img.shields.io/badge/Latest-Download-blue.svg)](https://ci.appveyor.com/api/projects/majorcyto/noggit3-ankkg/artifacts/Noggit3.zip) [![DoxygenDoc](https://img.shields.io/badge/Docs-Doxygen-red.svg)](http://noggitdocs.wowdev.info/)
 
 ## Build Status
 
 Build | Defects
 :------------: | :------------:
-[![Build status](https://ci.appveyor.com/api/projects/status/ycb8c1t6mv9y3i1u/branch/master?svg=true)](https://ci.appveyor.com/project/majorcyto/noggit3/branch/master) | Coverity Badge Soon
+[![Build status](https://ci.appveyor.com/api/projects/status/sd237gc7l5o34o28/branch/master?svg=true)](https://ci.appveyor.com/project/majorcyto/noggit3-ankkg/branch/master) | Coverity Badge Soon
 
 
 # LICENSE #
