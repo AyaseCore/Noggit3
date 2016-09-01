@@ -1,6 +1,7 @@
-# ![logo](http://i.imgur.com/LnUGSeD.png) Noggit | [![Bountysource](https://www.bountysource.com/badge/tracker?tracker_id=44146666)](https://www.bountysource.com/trackers/44146666-wowdevtools-noggit3?utm_source=4414666&utm_medium=shield&utm_campaign=TRACKER_BADGE)
+# ![logo](http://i.imgur.com/LnUGSeD.png) Noggit
 
 [![Latest Download](https://img.shields.io/badge/Latest-Download-blue.svg)](https://ci.appveyor.com/api/projects/majorcyto/noggit3-ankkg/artifacts/Noggit3.zip) [![DoxygenDoc](https://img.shields.io/badge/Docs-Doxygen-red.svg)](http://noggitdocs.wowdev.info/)
+[![Bountysource](https://www.bountysource.com/badge/tracker?tracker_id=44146666)](https://www.bountysource.com/trackers/44146666-wowdevtools-noggit3?utm_source=4414666&utm_medium=shield&utm_campaign=TRACKER_BADGE)
 
 ## Build Status
 
