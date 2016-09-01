@@ -1,11 +1,11 @@
-# ![logo](http://i.imgur.com/MAHce3N.png) Noggit
+# ![logo](http://i.imgur.com/LnUGSeD.png) Noggit
 
 [![Issue Stats](http://www.issuestats.com/github/majorcyto/Noggit3/badge/issue)](http://www.issuestats.com/github/majorcyto/Noggit3) [![Bountysource](https://www.bountysource.com/badge/tracker?tracker_id=1310)](https://www.bountysource.com/trackers/1310-trinity-core?utm_source=1310&utm_medium=shield&utm_campaign=TRACKER_BADGE)
 
 ## Build Status
 
-Noggit Status
-:------------:
+Build | Defects
+:------------: | :------------:
 [![Build status](https://ci.appveyor.com/api/projects/status/ycb8c1t6mv9y3i1u/branch/master?svg=true)](https://ci.appveyor.com/project/majorcyto/noggit3/branch/master) | [![Coverity Scan Build Status](https://scan.coverity.com/projects/4656/badge.svg)](https://scan.coverity.com/projects/4656)
 
 

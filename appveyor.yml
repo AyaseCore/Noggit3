@@ -13,7 +13,7 @@ before_build:
 build:
   parallel: true
   project: Noggit.sln
-  verbosity: minimal
+  verbosity: quiet
 after_build:
   - 7z a Noggit3.zip %APPVEYOR_BUILD_FOLDER%\Noggit3libs\SDL\lib\x86\SDL.dll
   - 7z a Noggit3.zip %APPVEYOR_BUILD_FOLDER%\Noggit3libs\freetype2\bin\freetype6.dll
